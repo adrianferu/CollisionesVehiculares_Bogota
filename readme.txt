@@ -14,4 +14,6 @@ Fuente del archivo original:		https://datosabiertos.bogota.gov.co/dataset/8624f9
 
 Dividiremos el proyecto en varios pasos:
 
-1. El primero será un EDA: Análisis Exploratorio de los datos de colsiiones en un Jupyter Notebook
+1. El primero será un EDA: Análisis Exploratorio de los datos de colsiiones en un Jupyter Notebook..
+
+Hice un pequeño cambio
