@@ -34,13 +34,7 @@ def load_data2(nrows):
 data = load_data(20000) #Hagamos la prueba con los primeros 20.000 registros
 #data = load_data2(30000) #Por ahora nos sirve, pero se demora bastante en cargar
 
-#Visualicemos la data en la pap
-#Podemos usar checkbox para que, por default, al usuario le de la opción de clickear si queire ver la data:
-if st.checkbox('Muéstrame la data procesada', False):
-    st.subheader('Data Cruda y preprocesada')
-    st.write(data)
-
-
+# "--------------------------"
 #Visualicacion de mapa: Se debe hacer con una query
 st.header('En qué sector de Bogotá está la mayor parte de los heridos por colisiones vehiculares?')
 #con_heridos = st.slider("Numero de personas heridas en colisiones vehiculares",3,9605) #Revisar: el valor maximo de accidentes es 15009
@@ -49,6 +43,16 @@ gravedad_seleccionada = st.select_slider('Seleccione la categoría de gravedad:'
                                              options=data['gravedad'].unique())
 #Ahora, el mapa
 st.map(data.query("gravedad == @gravedad_seleccionada")[["latitude","longitude"]])
+
+# "--------------------------"
+#Visualicemos la data en la pap
+#Podemos usar checkbox para que, por default, al usuario le de la opción de clickear si queire ver la data:
+if st.checkbox('Muéstrame la data procesada', False):
+    st.subheader('Data Cruda y preprocesada')
+    st.write(data)
+
+
+
 
 
 
