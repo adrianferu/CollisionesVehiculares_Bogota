@@ -17,3 +17,7 @@ Dividiremos el proyecto en varios pasos:
 1. El primero será un EDA: Análisis Exploratorio de los datos de colsiiones en un Jupyter Notebook..
 
 Hice un pequeño cambio
+
+1.a.Para esto, recuerda que deberemos crear un ambiente virtual: En mi caso, se llama geoPortfolioUbuntu
+1.b. Los packages necesarios para este trabajo se encuentran en el archivo requirements.txt
+
