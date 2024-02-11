@@ -35,7 +35,7 @@ def load_data2(nrows):
     return colisiones
 
 #Cargamos la data
-data = load_data(2000) #Hagamos la prueba con los primeros 20.000 registros
+data = load_data(20000) #Hagamos la prueba con los primeros 20.000 registros
 #data = load_data2(30000) #Por ahora nos sirve, pero se demora bastante en cargar
 
 # "--------------------------"
