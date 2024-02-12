@@ -68,30 +68,7 @@ st.map(data.query("gravedad == @gravedad_seleccionada")[["latitude","longitude"]
 
 
 # "--------------------------"
-'''
-#Usamos pyDeck para configurar la visualización de las layers:
-st.markdown('Colisiones de vehículos efectuadas entre la shoras: ')
-try:
-    midpoint = (np.average(data["latitude"]), np.average(data["longitude"]))
-    deck = pdk.Deck(
-        #map_style="mapbox://styles/mapbox/light-v9",
-        initial_view_state={
-            "latitude": midpoint[0],
-            "longitude": midpoint[1],
-            "zoom": 20,
-            "pitch": 50,
-        },
-        layers=[
-            pdk.Layer(
-                "HexagonLayer",
-                data=data[["fecha_hora_acc", "latitude", "longitude"]]
-            )
-        ]
-    )
-    st.pydeck_chart(deck)
-except Exception as e:
-    st.write(f"Aún no hemos podido resolver el filtro por accidentes y hora. Error: {e}")
-'''
+
 # ------------------------------------------------------
 st.markdown(f"Vehicle collisions between {hour}:00 and {hour + 1}:00")
 map_midpoint = (np.average(data['latitude']), np.average(data['longitude']))
@@ -118,7 +95,8 @@ st.write(pdk.Deck(
     ],
 ))
 
-
+#Creacion de histogramas
+st.subheader('Separación, por minutos, ')
 
 # "--------------------------"
 #Visualicemos la data en la pap
