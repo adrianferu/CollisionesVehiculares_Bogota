@@ -10,7 +10,7 @@ import plotly.express as px
 URL = 'https://datosabiertos.bogota.gov.co/dataset/8624f916-1db2-4c17-b669-19a19b35d1ca/resource/f5862aaa-4e1c-463e-94d5-f04db8164360/download/historico_siniestros_bogota_d.c_-.csv'
 st.title('Registro de siniestros viales en la ciudad de Bogotá, Colombias')
 
-st.markdown('Esta aplicación de Streamlit tiene como objetivo mostrar las colisiones de vehículos en la ciudad de Bogotá')
+st.markdown('Esta aplicación de Streamlit tiene como objetivo mostrar información acerca de las colisiones de vehículos en la ciudad de Bogotá')
 # "-------------------------------------------"
 #Función para cargar dataset en función del número de registros
 #Agregamos este parámetro para que sólo se hace la 'recomputation' cuando hayan cambios
@@ -35,16 +35,23 @@ def load_data2(nrows):
     return colisiones
 # "-------------------------------------------"
 #Cargue de la data
-data = load_data(30000) #Hagamos la prueba con los primeros 20.000 registros
+data = load_data(199145) #Hagamos la prueba con los primeros 20.000 registros
 original_data = data #Creamos esto para, más adelante, poder hacer la selección por localicadaes. Aparentemente la data es modificada abajo
 # "-------------------------------------------"
+
 # Filtro de accidentes por hora: st.slider()
-st.header("Consulta cuántos accidentes hay dada la diferencia de hora: ")
+st.header("Consulta la información relacionada a acidentes dependiendo de la hora: ")
 # A a sidebar st.sidebar.slider
 hour = st.slider("Selecciona la hora entre", 0, 23)
 data = data[data['fecha_hora_acc'].dt.hour == hour]
 
 # "-------------------------------------------"
+#FILTRO POR AÑO Y FILTRO POR FECHA DE OCURRENCIA
+# Filtro por año de ocurrencia del accidente
+st.header("Consulta la información relacionada a acidentes dependiendo del año de ocurrencia: ")
+rango_anos = st.slider("Selecciona un rango de años", min_value=int(data['ano_ocurrencia_acc'].min()), max_value=int(data['ano_ocurrencia_acc'].max()))
+data = data[data['ano_ocurrencia_acc'] == rango_anos]
+# "--------------------------"
 #Visualicacion de mapa: uso de st.slider(); st.map() y query
 st.header('Consulta la concentración de accidentes de tránsito por categoría: ')
 # Crear un slider para seleccionar la categoría de gravedad
@@ -118,12 +125,13 @@ if opcion_seleccionada in condiciones:
     # Ordenar el DataFrame por la columna 'Cantidad de Registros' de forma descendente
     df_filtrado = df_filtrado.sort_values(by='Cantidad de Accidentes', ascending=False)
     # Mostrar solo los 10 primeros valores
-    df_filtrado = df_filtrado.head(5)
+    df_filtrado = df_filtrado.head(10)
     st.write("DataFrame filtrado:")
     st.write(df_filtrado)
 else:
     st.write("Opción no válida")
 # "--------------------------"
+
 #Visualicemos la data en la pap
 #Podemos usar checkbox para que, por default, al usuario le de la opción de clickear si queire ver la data:
 if st.checkbox('Muéstrame la data procesada', False):
