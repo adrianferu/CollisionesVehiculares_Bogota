@@ -25,17 +25,22 @@ def load_data(nrows):
 
 #PRUEBA: ALTERNATIVA A SI LO HACEMOS DIORECTAMENTE DESDE EL ENLACE:
 def load_data2(nrows):
-    colisiones = pd.read_csv(URL, nrows=nrows)
-    colisiones.drop(columns=['X','Y','OBJECTID'],inplace=True)
-    colisiones['PK_CALZADA'] = colisiones['PK_CALZADA'].fillna('SIN CALZADA')
-    colisiones['FECHA_HORA_ACC'] = pd.to_datetime(colisiones['FECHA_HORA_ACC'])
-    colisiones['FECHA_ACC'] = colisiones['FECHA_HORA_ACC'].dt.date
-    colisiones['HORA_ACC'] = colisiones['FECHA_HORA_ACC'].dt.time
+    colisiones = pd.read_csv(URL, nrows=nrows, parse_dates=['FECHA_HORA_ACC', 'FECHA_OCURRENCIA_ACC'])
+    lowercase = lambda x: str(x).lower()
+    colisiones.rename(lowercase, axis='columns', inplace=True)#Pasamos los nombres de columnas a minúsculas
+    colisiones.drop(columns=['x','y','objectid'],inplace=True)#Borramos columnas innecesarias
+    colisiones['pk_calzada'] = colisiones['pk_calzada'].fillna('sin calzada') #Tratamos valores nulos
+    colisiones['civ'] = colisiones['civ'].fillna(0) #trata,ps valores nulos
+    colisiones['localidad'] = colisiones['localidad'].fillna('sin informacion') #tratamos valores nulos
+    #colisiones['FECHA_HORA_ACC'] = pd.to_datetime(colisiones['FECHA_HORA_ACC'])
+    colisiones.rename(columns={'latitud':'latitude', 'longitud':'longitude'}, inplace=True) #Cambio de nombre: lectura de streamlit
+
+   
 
     return colisiones
 # "-------------------------------------------"
 #Cargue de la data
-data = load_data(199145) #Hagamos la prueba con los primeros 20.000 registros
+data = load_data2(199145) #Hagamos la prueba con los primeros 20.000 registros
 original_data = data #Creamos esto para, más adelante, poder hacer la selección por localicadaes. Aparentemente la data es modificada abajo
 # "-------------------------------------------"
 
