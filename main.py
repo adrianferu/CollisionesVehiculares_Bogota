@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd 
 import numpy as np
 import pydeck as pdk #Debemos importar esta librería
-from streamlit_deckgl import st_deckgl #Debemos importar esta libnrería
+#from streamlit_deckgl import st_deckgl #Debemos importar esta libnrería
 import plotly.express as px
 
 # "-------------------------------------------"
