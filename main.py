@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd 
 import numpy as np
 import pydeck as pdk #Debemos importar esta librería
-#from streamlit_deckgl import st_deckgl #Debemos importar esta libnrería
+from streamlit_deckgl import st_deckgl #Debemos importar esta libnrería
 import plotly.express as px
 
 # "-------------------------------------------"
@@ -24,6 +24,7 @@ def load_data(nrows):
     return colisiones
 
 #PRUEBA: ALTERNATIVA A SI LO HACEMOS DIORECTAMENTE DESDE EL ENLACE:
+@st.cache_data(persist=True)
 def load_data2(nrows):
     colisiones = pd.read_csv(URL, nrows=nrows, parse_dates=['FECHA_HORA_ACC', 'FECHA_OCURRENCIA_ACC'])
     lowercase = lambda x: str(x).lower()
@@ -40,7 +41,7 @@ def load_data2(nrows):
     return colisiones
 # "-------------------------------------------"
 #Cargue de la data
-data = load_data2(199145) #Hagamos la prueba con los primeros 20.000 registros
+data = load_data(199145) #Hagamos la prueba con los primeros 20.000 registros
 original_data = data #Creamos esto para, más adelante, poder hacer la selección por localicadaes. Aparentemente la data es modificada abajo
 # "-------------------------------------------"
 
