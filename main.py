@@ -41,7 +41,7 @@ def load_data2(nrows):
     return colisiones
 # "-------------------------------------------"
 #Cargue de la data
-data = load_data(199145) #Hagamos la prueba con los primeros 20.000 registros
+data = load_data2(199145) #Hagamos la prueba con los primeros 20.000 registros
 original_data = data #Creamos esto para, más adelante, poder hacer la selección por localicadaes. Aparentemente la data es modificada abajo
 # "-------------------------------------------"
 
