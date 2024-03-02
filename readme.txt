@@ -38,3 +38,5 @@ Hice un pequeño cambio
 
 Usamos la versión de python: Python 3.7.9
 
+Clonamos este repo en el pc de mesa. Comprobemos si están bien sincronizados
+
